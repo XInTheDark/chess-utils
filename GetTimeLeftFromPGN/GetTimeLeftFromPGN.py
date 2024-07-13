@@ -7,7 +7,7 @@ import re
 ROUNDING = 2
 
 
-def main(pgn):
+def getTimeLeftFromPGN(pgn):
     # get time control
     time_control = re.search(r'TimeControl \"(.*)\"', pgn)
     time_control = time_control.group(1)
@@ -57,4 +57,4 @@ if __name__ == "__main__":
     # read from file
     with open('pgn.txt', 'r') as file:
         pgn = file.read()
-    print(main(pgn))
+    print(getTimeLeftFromPGN(pgn))
