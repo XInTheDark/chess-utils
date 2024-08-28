@@ -8,7 +8,7 @@ def parse_tune_results(file):
     for line in lines:
         line = line.strip().split()
         
-        if len(line) <= 1:
+        if len(line) <= 2:
             print("Skipping line: ", line)
             continue
         try:
