@@ -11,23 +11,35 @@ def apply_search_tune_results_by_name(search_cpp, tune_results):
         
     cnt = 0
     
-    for param in tune_results:
-        name, value, original_value = param
+    remaining = tune_results.copy()
+    
+    while True:
+        replaced = False
         
-        # search file for the NAME
-        # if there is only 1 match, replace it with the tuned value
-        if file.count(str(name)) == 1:
-            file = file.replace(str(name), str(value))
-            cnt += 1
-        else:
-            print(f"{name}, {original_value} -> {value}")
+        for param in remaining:
+            name, value, original_value = param
+            
+            # search file for the NAME
+            # if there is only 1 match, replace it with the tuned value
+            if file.count(str(name)) == 1:
+                file = file.replace(str(name), str(value))
+                cnt += 1
+                replaced = True
+                remaining.remove(param)
+                
+        if not replaced:
+            break
+    
+    for param in remaining:
+        name, value, original_value = param
+        print(f"{name}, {original_value} -> {value}")
         
     new_path = search_cpp.replace(".cpp", "_tuned.cpp")
     with open(new_path, 'w') as f:
         f.write(file)
         
-    print(f"Applied {cnt} results to {new_path}")
+    print(f"Applied {cnt} results to {new_path} (Total: {len(tune_results)})")
         
 
 if __name__ == "__main__":
-    apply_search_tune_results_by_name("tune_search.cpp", "tune_results_230824_115k.txt")
+    apply_search_tune_results_by_name("tune_search.cpp", "results/tune_results_161024_42k.txt")
