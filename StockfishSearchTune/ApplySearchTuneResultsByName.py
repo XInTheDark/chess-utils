@@ -12,7 +12,10 @@ def apply_search_tune_results_by_name(search_cpp, tune_results):
     cnt = 0
     
     remaining = tune_results.copy()
-    
+
+    # optimisation: sort params by length (longest first) to reduce number of passes
+    remaining.sort(key=lambda x: len(x[0]), reverse=True)
+
     while True:
         replaced = False
         
@@ -42,4 +45,4 @@ def apply_search_tune_results_by_name(search_cpp, tune_results):
         
 
 if __name__ == "__main__":
-    apply_search_tune_results_by_name("tune_search.cpp", "results/tune_results_161024_190k.txt")
+    apply_search_tune_results_by_name("tune_search.cpp", "results/tune_results_20250102_25.6k.txt")
