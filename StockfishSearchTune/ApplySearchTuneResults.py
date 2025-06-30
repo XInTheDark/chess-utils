@@ -32,4 +32,5 @@ def apply_search_tune_results(search_cpp, tune_results):
         
 
 if __name__ == "__main__":
-    apply_search_tune_results("search.cpp", "tune_results_230824_31k.txt")
+    # apply_search_tune_results("search.cpp", "tune_results_230824_31k.txt")
+    apply_search_tune_results("tune_header.cpp", "results/tune_results_20250102_118k.txt")
